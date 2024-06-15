@@ -1,0 +1,139 @@
+// Definir variables de usuarios y recompensas
+entero id_usuario1 = 1, id_usuario2 = 2, id_usuario3 = 3
+cadena nombre_usuario1 = "Usuario1", nombre_usuario2 = "Usuario2", nombre_usuario3 = "Usuario3"
+flotante papel_usuario1 = 0.0, plastico_usuario1 = 0.0, vidrio_usuario1 = 0.0
+flotante papel_usuario2 = 0.0, plastico_usuario2 = 0.0, vidrio_usuario2 = 0.0
+flotante papel_usuario3 = 0.0, plastico_usuario3 = 0.0, vidrio_usuario3 = 0.0
+entero puntos_usuario1 = 0, puntos_usuario2 = 0, puntos_usuario3 = 0
+ 
+cadena nombre_recompensa1 = "Descuento en tienda", nombre_recompensa2 = "Entrada de cine", nombre_recompensa3 = "Vale de restaurante"
+entero puntos_recompensa1 = 100, puntos_recompensa2 = 200, puntos_recompensa3 = 300
+ 
+// Inicio del ciclo principal
+mientras (verdadero) {
+    // Mostrar menú
+    imprimir("Sistema de Gestión de Reciclaje")
+    imprimir("1. Registrar Reciclaje")
+    imprimir("2. Ver Estadísticas")
+    imprimir("3. Canjear Puntos")
+    imprimir("4. Salir")
+    imprimir("Seleccione una opción: ")
+ 
+    entero opcion
+    leer(opcion)
+ 
+    si (opcion == 4) {
+        imprimir("Saliendo...")
+        romper
+    }
+ 
+    entero id_usuario
+    imprimir("Ingrese el ID de usuario (1-3): ")
+    leer(id_usuario)
+ 
+    si (id_usuario < 1 o id_usuario > 3) {
+        imprimir("ID de usuario no válido.")
+        continuar
+    }
+ 
+    // Variables de usuario seleccionadas
+    cadena nombre_usuario
+    flotante papel_usuario, plastico_usuario, vidrio_usuario
+    entero puntos_usuario
+ 
+    si (id_usuario == id_usuario1) {
+        nombre_usuario = nombre_usuario1
+        papel_usuario = papel_usuario1
+        plastico_usuario = plastico_usuario1
+        vidrio_usuario = vidrio_usuario1
+        puntos_usuario = puntos_usuario1
+    } sino si (id_usuario == id_usuario2) {
+        nombre_usuario = nombre_usuario2
+        papel_usuario = papel_usuario2
+        plastico_usuario = plastico_usuario2
+        vidrio_usuario = vidrio_usuario2
+        puntos_usuario = puntos_usuario2
+    } sino {
+        nombre_usuario = nombre_usuario3
+        papel_usuario = papel_usuario3
+        plastico_usuario = plastico_usuario3
+        vidrio_usuario = vidrio_usuario3
+        puntos_usuario = puntos_usuario3
+    }
+ 
+    seleccionar (opcion) {
+        caso 1:
+            entero tipo
+            flotante cantidad
+ 
+            imprimir("Seleccione el tipo de material:")
+            imprimir("1. Papel")
+            imprimir("2. Plástico")
+            imprimir("3. Vidrio")
+            imprimir("Tipo: ")
+            leer(tipo)
+ 
+            imprimir("Cantidad (kg): ")
+            leer(cantidad)
+ 
+            si (tipo == 1) {
+                papel_usuario += cantidad
+                puntos_usuario += entero(cantidad * 10)
+            } sino si (tipo == 2) {
+                plastico_usuario += cantidad
+                puntos_usuario += entero(cantidad * 20)
+            } sino si (tipo == 3) {
+                vidrio_usuario += cantidad
+                puntos_usuario += entero(cantidad * 15)
+            } sino {
+                imprimir("Tipo no válido.")
+                continuar
+            }
+ 
+            imprimir("Reciclaje registrado con éxito.")
+            romper
+        caso 2:
+            imprimir("Estadísticas de Reciclaje para ", nombre_usuario, ":")
+            imprimir("Papel: ", papel_usuario, " kg")
+            imprimir("Plástico: ", plastico_usuario, " kg")
+            imprimir("Vidrio: ", vidrio_usuario, " kg")
+            imprimir("Puntos acumulados: ", puntos_usuario)
+            romper
+        caso 3:
+            imprimir("Recompensas disponibles:")
+            imprimir("1. ", nombre_recompensa1, " - ", puntos_recompensa1, " puntos")
+            imprimir("2. ", nombre_recompensa2, " - ", puntos_recompensa2, " puntos")
+            imprimir("3. ", nombre_recompensa3, " - ", puntos_recompensa3, " puntos")
+ 
+            entero opcion_recompensa
+            imprimir("Seleccione una recompensa: ")
+            leer(opcion_recompensa)
+ 
+            entero puntos_requeridos
+            cadena nombre_recompensa
+            si (opcion_recompensa == 1) {
+                puntos_requeridos = puntos_recompensa1
+                nombre_recompensa = nombre_recompensa1
+            } sino si (opcion_recompensa == 2) {
+                puntos_requeridos = puntos_recompensa2
+                nombre_recompensa = nombre_recompensa2
+            } sino si (opcion_recompensa == 3) {
+                puntos_requeridos = puntos_recompensa3
+                nombre_recompensa = nombre_recompensa3
+            } sino {
+                imprimir("Selección no válida.")
+                continuar
+            }
+ 
+            si (puntos_usuario >= puntos_requeridos) {
+                puntos_usuario -= puntos_requeridos
+                imprimir("Has canjeado ", nombre_recompensa, ".")
+            } sino {
+                imprimir("No tienes suficientes puntos para canjear esta recompensa.")
+            }
+            romper
+        por defecto:
+            imprimir("Opción no válida.")
+            romper
+    }
+}
